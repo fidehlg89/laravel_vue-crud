@@ -20,8 +20,8 @@ class ThoughtController extends Controller
      */
     public function index()
     {
-        return Thought::where('user_id', auth()->id())->get()
-      }
+        return Thought::where('user_id', auth()->id())->get();
+    }
 
     /**
      * Store a newly created resource in storage.
