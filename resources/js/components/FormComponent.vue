@@ -1,32 +1,22 @@
 <template>
-    <div class="container mb-2">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header">
-                        ¿En qué estás pensando ahora?
-                    </div>
+    <div class="card mb-2">
+        <div class="card-header">¿En qué estás pensando ahora?</div>
 
-                    <div class="card-body">
-                        <form action="" v-on:submit.prevent="newThought()">
-                            <div class="form-group">
-                                <label for="thought"
-                                    >Ahora estoy pensando en:</label
-                                >
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    name="thought"
-                                    v-model="description"
-                                />
-                            </div>
-                            <button type="submit" class="btn btn-primary">
-                                Enviar pensamiento
-                            </button>
-                        </form>
-                    </div>
+        <div class="card-body">
+            <form action="" v-on:submit.prevent="newThought()">
+                <div class="form-group">
+                    <label for="thought">Ahora estoy pensando en:</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="thought"
+                        v-model="description"
+                    />
                 </div>
-            </div>
+                <button type="submit" class="btn btn-primary">
+                    Enviar
+                </button>
+            </form>
         </div>
     </div>
 </template>
