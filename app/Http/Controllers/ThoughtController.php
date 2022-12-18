@@ -45,9 +45,9 @@ class ThoughtController extends Controller
      * @param  \App\Models\Thought  $thought
      * @return \Illuminate\Http\Response
      */
-    public function show(Thought $thought)
+    public function show($id)
     {
-        //
+        return Thought::where('id', $id)->get();
     }
 
     /**
@@ -57,9 +57,9 @@ class ThoughtController extends Controller
      * @param  \App\Models\Thought  $thought
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Thought $thought)
+    public function update(Request $request, $id)
     {
-        $thought = Thought::find($id);
+        $thought = Thought::findOrFail($id);
         $thought->description = $request->description;
         $thought->save();
 
@@ -72,8 +72,9 @@ class ThoughtController extends Controller
      * @param  \App\Models\Thought  $thought
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Thought $thought)
+    public function destroy($id)
     {
+        $thought = Thought::findOrFail($id);
         $thought->delete();
     }
 }

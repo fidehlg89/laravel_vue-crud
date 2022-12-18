@@ -1,48 +1,36 @@
 <template>
-    <div class="container mb-2">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header">
-                        Publicado en {{ thought.created_at }} - Última
-                        actualización: {{ thought.updated_at }}
-                    </div>
+    <div class="card mb-2">
+        <div class="card-header">
+            Publicado en {{ thought.created_at }} - Última actualización:
+            {{ thought.updated_at }}
+        </div>
 
-                    <div class="card-body">
-                        <input
-                            v-if="editMode"
-                            type="text"
-                            class="form-control"
-                            v-model="thought.description"
-                        />
-                        <p v-else>{{ thought.description }}</p>
-                    </div>
+        <div class="card-body">
+            <input
+                v-if="editMode"
+                type="text"
+                class="form-control"
+                v-model="thought.description"
+                v-on:keyup.enter="onUpdate()"
+            />
+            <p v-else>{{ thought.description }}</p>
+        </div>
 
-                    <div class="card-footer">
-                        <button
-                            v-if="editMode"
-                            class="btn btn-success"
-                            v-on:click="onClickUpdate()"
-                        >
-                            Guardar cambios
-                        </button>
-                        <button
-                            v-else
-                            class="btn btn-default"
-                            v-on:click="onClickEdit()"
-                        >
-                            Editar
-                        </button>
+        <div class="card-footer">
+            <button
+                v-if="editMode"
+                class="btn btn-success"
+                v-on:click="onUpdate()"
+            >
+                Guardar cambios
+            </button>
+            <button v-else class="btn btn-default" v-on:click="onClickEdit()">
+                Editar
+            </button>
 
-                        <button
-                            class="btn btn-danger"
-                            v-on:click="onClickDelete()"
-                        >
-                            Eliminar
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <button class="btn btn-danger" v-on:click="onClickDelete()">
+                Eliminar
+            </button>
         </div>
     </div>
 </template>
@@ -56,7 +44,7 @@ export default {
         };
     },
     mounted() {
-        console.log("Component mounted.");
+        console.log(this.thought.description);
     },
     methods: {
         onClickDelete() {
@@ -67,17 +55,16 @@ export default {
         onClickEdit() {
             this.editMode = true;
         },
-        onClickUpdate() {
+        onUpdate() {
+            let $id = this.thought.id;
             const params = {
                 description: this.thought.description,
             };
-            axios
-                .put(`/thoughts/${this.thought.id}`, params)
-                .then((response) => {
-                    this.editMode = false;
-                    const thought = response.data;
-                    this.$emit("update", thought);
-                });
+            axios.put(`/thoughts/${$id}`, params).then((response) => {
+                this.editMode = false;
+                const thought = response.data;
+                this.$emit("update", thought);
+            });
         },
     },
 };
