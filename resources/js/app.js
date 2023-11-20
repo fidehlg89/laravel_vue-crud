@@ -9,7 +9,6 @@ import { createApp } from "vue";
 
 const app = createApp({});
 
-import ExampleComponent from "./components/ExampleComponent.vue";
 import ThoughtComponent from "./components/ThoughtComponent.vue";
 import MyThoughtsComponent from "./components/MyThoughtsComponent.vue";
 import FormComponent from "./components/FormComponent.vue";
