@@ -51,4 +51,5 @@ export default {
         background-color: gray;
         color: white;
     }
+    
 </style>

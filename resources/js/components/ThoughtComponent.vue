@@ -1,27 +1,18 @@
 <template>
     <div class="card mb-2">
         <div class="card-header">
-            Publicado en {{ thought.created_at }} - Última actualización:
-            {{ thought.updated_at }}
+            Publicado en {{ formatDateTime(thought.created_at) }} - Última actualización:
+            {{ formatDateTime(thought.updated_at) }}
         </div>
 
         <div class="card-body">
-            <input
-                v-if="editMode"
-                type="text"
-                class="form-control"
-                v-model="thought.description"
-                v-on:keyup.enter="onUpdate()"
-            />
+            <input v-if="editMode" type="text" class="form-control" v-model="thought.description"
+                v-on:keyup.enter="onUpdate()" />
             <p v-else>{{ thought.description }}</p>
         </div>
 
         <div class="card-footer">
-            <button
-                v-if="editMode"
-                class="btn btn-success"
-                v-on:click="onUpdate()"
-            >
+            <button v-if="editMode" class="btn btn-success" v-on:click="onUpdate()">
                 Guardar cambios
             </button>
             <button v-else class="btn btn-default" v-on:click="onClickEdit()">
@@ -29,7 +20,7 @@
             </button>
 
             <button class="btn btn-danger" v-on:click="onClickDelete()">
-                Eliminar
+                Borrar
             </button>
         </div>
     </div>
@@ -47,6 +38,17 @@ export default {
         console.log(this.thought.description);
     },
     methods: {
+        formatDateTime(dateTimeString) {
+            const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true,
+            };
+            return new Date(dateTimeString).toLocaleDateString('es-ES', options);
+        },
         onClickDelete() {
             axios.delete(`/thoughts/${this.thought.id}`).then(() => {
                 this.$emit("delete");

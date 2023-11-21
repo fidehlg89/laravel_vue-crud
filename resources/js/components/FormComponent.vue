@@ -5,17 +5,15 @@
         <div class="card-body">
             <form action="" v-on:submit.prevent="newThought()">
                 <div class="form-group">
-                    <label for="thought">Ahora estoy pensando en:</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="thought"
-                        v-model="description"
-                    />
+                    <textarea placeholder="Escribe aquí tus pensamientos" type="text" class="form-control rounded-1" rows="4"
+                        name="thought" v-model="description" />
                 </div>
-                <button type="submit" class="btn btn-primary">
-                    Enviar
-                </button>
+                <div class="mt-2 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary m-0 rounded-5">
+                        Listo
+                    </button>
+                </div>
+
             </form>
         </div>
     </div>
